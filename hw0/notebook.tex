@@ -1,0 +1,1502 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Homework 0}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Task 1}\label{task-1}
+
+``` \textgreater{}\textgreater{} conda list
+
+\begin{verbatim}
+ active environment : None
+   user config file : /Users/aidancurtis/.condarc
+\end{verbatim}
+
+populated config files : /Users/aidancurtis/.condarc conda version :
+4.4.10 conda-build version : 3.4.1 python version : 3.6.4.final.0 base
+environment : /Users/aidancurtis/anaconda3 (writable) channel URLs :
+https://repo.continuum.io/pkgs/main/osx-64
+https://repo.continuum.io/pkgs/main/noarch
+https://repo.continuum.io/pkgs/free/osx-64
+https://repo.continuum.io/pkgs/free/noarch
+https://repo.continuum.io/pkgs/r/osx-64
+https://repo.continuum.io/pkgs/r/noarch
+https://repo.continuum.io/pkgs/pro/osx-64
+https://repo.continuum.io/pkgs/pro/noarch package cache :
+/Users/aidancurtis/anaconda3/pkgs /Users/aidancurtis/.conda/pkgs envs
+directories : /Users/aidancurtis/anaconda3/envs
+/Users/aidancurtis/.conda/envs platform : osx-64 user-agent :
+conda/4.4.10 requests/2.18.4 CPython/3.6.4 Darwin/17.7.0 OSX/10.13.6
+UID:GID : 501:20 netrc file : /Users/aidancurtis/.netrc offline mode :
+False ```
+
+    \section{Task 2}\label{task-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}370}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{linalg}
+          \PY{k+kn}{import} \PY{n+nn}{scipy}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}371}]:} \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,}\PY{l+m+mf}{2.}\PY{p}{,}\PY{l+m+mf}{3.}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{4.}\PY{p}{,}\PY{l+m+mf}{5.}\PY{p}{,}\PY{l+m+mf}{6.}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1. 2. 3.]
+ [4. 5. 6.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}372}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ndim}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}373}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}374}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(2, 3)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}375}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}376}]:} \PY{n}{ai} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{bi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ci} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{di} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{block}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{ai}\PY{p}{,}\PY{n}{bi}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{ci}\PY{p}{,}\PY{n}{di}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]
+ [13 14 14 15]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}377}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[4. 5. 6.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}378}]:} \PY{n}{b} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[65 61 29 86 70 81  2 37 66 11]
+ [64 80 54 15  8 53 23 80 90 36]
+ [ 7 30 87 54 78 83 54 32 17 62]
+ [ 6 84 69 15 97 81  1 69 81 94]
+ [94 81 81 54 59 10 35 26 19 54]
+ [62 88 25 33 61 15 14 18  1 82]
+ [35  6 82 97  3 47 17 95 63 14]
+ [62 29 94 49 81 32 37  8 34 47]
+ [59 56 63 68  6 58 97 60 35 17]
+ [ 1 54 41 75 23 12 22 43  2 18]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}379}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[64 80 54 15  8 53 23 80 90 36]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}380}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[62 88 25 33 61 15 14 18  1 82]
+ [35  6 82 97  3 47 17 95 63 14]
+ [62 29 94 49 81 32 37  8 34 47]
+ [59 56 63 68  6 58 97 60 35 17]
+ [ 1 54 41 75 23 12 22 43  2 18]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}381}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[70 81  2 37 66]
+ [ 8 53 23 80 90]
+ [78 83 54 32 17]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}382}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ix\PYZus{}}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[64 54]
+ [ 6 69]
+ [94 81]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}383}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[} \PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{21}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 7 30 87 54 78 83 54 32 17 62]
+ [94 81 81 54 59 10 35 26 19 54]
+ [35  6 82 97  3 47 17 95 63 14]
+ [59 56 63 68  6 58 97 60 35 17]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}384}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[} \PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[65 61 29 86 70 81  2 37 66 11]
+ [ 7 30 87 54 78 83 54 32 17 62]
+ [94 81 81 54 59 10 35 26 19 54]
+ [35  6 82 97  3 47 17 95 63 14]
+ [59 56 63 68  6 58 97 60 35 17]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}385}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[} \PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1 54 41 75 23 12 22 43  2 18]
+ [59 56 63 68  6 58 97 60 35 17]
+ [62 29 94 49 81 32 37  8 34 47]
+ [35  6 82 97  3 47 17 95 63 14]
+ [62 88 25 33 61 15 14 18  1 82]
+ [94 81 81 54 59 10 35 26 19 54]
+ [ 6 84 69 15 97 81  1 69 81 94]
+ [ 7 30 87 54 78 83 54 32 17 62]
+ [64 80 54 15  8 53 23 80 90 36]
+ [65 61 29 86 70 81  2 37 66 11]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}386}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{r\PYZus{}}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[65 61 29 86 70 81  2 37 66 11]
+ [64 80 54 15  8 53 23 80 90 36]
+ [ 7 30 87 54 78 83 54 32 17 62]
+ [ 6 84 69 15 97 81  1 69 81 94]
+ [94 81 81 54 59 10 35 26 19 54]
+ [62 88 25 33 61 15 14 18  1 82]
+ [35  6 82 97  3 47 17 95 63 14]
+ [62 29 94 49 81 32 37  8 34 47]
+ [59 56 63 68  6 58 97 60 35 17]
+ [ 1 54 41 75 23 12 22 43  2 18]
+ [65 61 29 86 70 81  2 37 66 11]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}387}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1. 4.]
+ [2. 5.]
+ [3. 6.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}388}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{conj}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1. 4.]
+ [2. 5.]
+ [3. 6.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}389}]:} \PY{n}{c} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+          \PY{n}{d} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[76 87]
+ [43  1]
+ [ 0 88]]
+[[72 70]
+ [97 78]
+ [92 28]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}390}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{n+nd}{@c}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[162. 353.]
+ [519. 881.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}391}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{o}{*}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[5472 6090]
+ [4171   78]
+ [   0 2464]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}392}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{o}{/}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1.05555556 1.24285714]
+ [0.44329897 0.01282051]
+ [0.         3.14285714]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}393}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[  1.   8.  27.]
+ [ 64. 125. 216.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}394}]:} \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ True  True  True]
+ [ True  True  True]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}395}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(array([0, 0, 0, 1, 1, 1]), array([0, 1, 2, 0, 1, 2]))
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}396}]:} \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mf}{0.6}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{n}{v}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[2. 3.]
+ [5. 6.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}397}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{v}\PY{o}{.}\PY{n}{T}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[2. 3.]
+ [5. 6.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}398}]:} \PY{n}{b}\PY{p}{[}\PY{n}{b}\PY{o}{\PYZlt{}}\PY{l+m+mi}{40}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[65 61  0 86 70 81  0  0 66  0]
+ [64 80 54  0  0 53  0 80 90  0]
+ [ 0  0 87 54 78 83 54  0  0 62]
+ [ 0 84 69  0 97 81  0 69 81 94]
+ [94 81 81 54 59  0  0  0  0 54]
+ [62 88  0  0 61  0  0  0  0 82]
+ [ 0  0 82 97  0 47  0 95 63  0]
+ [62  0 94 49 81  0  0  0  0 47]
+ [59 56 63 68  0 58 97 60  0  0]
+ [ 0 54 41 75  0  0  0 43  0  0]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}399}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a} \PY{o}{*} \PY{p}{(}\PY{n}{a}\PY{o}{\PYZgt{}}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0. 0. 0.]
+ [0. 0. 6.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}400}]:} \PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{3}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[3. 3. 3.]
+ [3. 3. 3.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}401}]:} \PY{n}{x} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{1.}\PY{p}{,}\PY{l+m+mf}{11.}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[36 89 78 57 67 19 71 94 60 24]
+ [81 18 71 71  2  8 95 56 42 32]
+ [44 83 66 18  5 91 30 43 18 74]
+ [98 95 68 62 14 78 27 77 76 17]
+ [97 76 57 57 24 58 84 39  9 35]
+ [71 35 48 26 65 23 27 68 21 75]
+ [58 23  4 20 62 65 60 17 86  3]
+ [51  9 62  7  6 51 56 23 76 34]
+ [79 80 71 50 19 76 15 19 45 33]
+ [93 51 52 20 88 89 75 28 32 65]]
+[[36 89 78 57 67 19 71 94 60 24]
+ [81 18 71 71  2  8 95 56 42 32]
+ [44 83 66 18  5 91 30 43 18 74]
+ [98 95 68 62 14 78 27 77 76 17]
+ [97 76 57 57 24 58 84 39  9 35]
+ [71 35 48 26 65 23 27 68 21 75]
+ [58 23  4 20 62 65 60 17 86  3]
+ [51  9 62  7  6 51 56 23 76 34]
+ [79 80 71 50 19 76 15 19 45 33]
+ [93 51 52 20 88 89 75 28 32 65]]
+[81 18 71 71  2  8 95 56 42 32]
+[36 89 78 57 67 19 71 94 60 24 81 18 71 71  2  8 95 56 42 32 44 83 66 18
+  5 91 30 43 18 74 98 95 68 62 14 78 27 77 76 17 97 76 57 57 24 58 84 39
+  9 35 71 35 48 26 65 23 27 68 21 75 58 23  4 20 62 65 60 17 86  3 51  9
+ 62  7  6 51 56 23 76 34 79 80 71 50 19 76 15 19 45 33 93 51 52 20 88 89
+ 75 28 32 65]
+[ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}402}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{10.}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0. 1. 2. 3. 4. 5. 6. 7. 8. 9.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}403}]:} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{1.}\PY{p}{,}\PY{l+m+mf}{11.}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}403}]:} array([[ 1.],
+                 [ 2.],
+                 [ 3.],
+                 [ 4.],
+                 [ 5.],
+                 [ 6.],
+                 [ 7.],
+                 [ 8.],
+                 [ 9.],
+                 [10.]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}404}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}405}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[[0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]]
+
+ [[0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]]
+
+ [[0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]
+  [0. 0. 0. 0. 0.]]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}406}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1. 1. 1. 1.]
+ [1. 1. 1. 1.]
+ [1. 1. 1. 1.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}407}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}408}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[3. 3.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}409}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[3. 3.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}410}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0.8671586  0.94197865 0.4243342  0.95954856]
+ [0.85319904 0.61033122 0.05324584 0.24913013]
+ [0.91770507 0.24973609 0.1948976  0.74173103]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}411}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1.         1.66666667 2.33333333 3.        ]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}412}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mgrid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mf}{9.}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mf}{6.}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[[0. 0. 0. 0. 0. 0.]
+  [1. 1. 1. 1. 1. 1.]
+  [2. 2. 2. 2. 2. 2.]
+  [3. 3. 3. 3. 3. 3.]
+  [4. 4. 4. 4. 4. 4.]
+  [5. 5. 5. 5. 5. 5.]
+  [6. 6. 6. 6. 6. 6.]
+  [7. 7. 7. 7. 7. 7.]
+  [8. 8. 8. 8. 8. 8.]]
+
+ [[0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]
+  [0. 1. 2. 3. 4. 5.]]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}413}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ogrid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mf}{9.}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mf}{6.}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[array([[0.],
+       [1.],
+       [2.],
+       [3.],
+       [4.],
+       [5.],
+       [6.],
+       [7.],
+       [8.]]), array([[0., 1., 2., 3., 4., 5.]])]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}414}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[array([[1, 2, 4],
+       [1, 2, 4],
+       [1, 2, 4]]), array([[2, 2, 2],
+       [4, 4, 4],
+       [5, 5, 5]])]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}415}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ix\PYZus{}}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(array([[1],
+       [2],
+       [4]]), array([[2, 4, 5]]))
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}416}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{tile}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[3. 3. 3. 3. 3. 3. 3. 3. 3.]
+ [3. 3. 3. 3. 3. 3. 3. 3. 3.]
+ [3. 3. 3. 3. 3. 3. 3. 3. 3.]
+ [3. 3. 3. 3. 3. 3. 3. 3. 3.]
+ [3. 3. 3. 3. 3. 3. 3. 3. 3.]
+ [3. 3. 3. 3. 3. 3. 3. 3. 3.]
+ [3. 3. 3. 3. 3. 3. 3. 3. 3.]
+ [3. 3. 3. 3. 3. 3. 3. 3. 3.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}417}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[76 87 72 70]
+ [43  1 97 78]
+ [ 0 88 92 28]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}418}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}419}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[3. 3. 3.]
+[3. 3.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}420}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{d}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[76 87]
+ [97 78]
+ [92 88]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}421}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.16619037896906
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}422}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ True  True]
+ [ True  True]
+ [False  True]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}423}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ True  True]
+ [ True  True]
+ [False  True]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}424}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{o}{\PYZam{}}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[72 70]
+ [33  0]
+ [ 0 24]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}425}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{o}{|}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 76  87]
+ [107  79]
+ [ 92  92]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}426}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[-0.00187012  0.03576682  0.02449569 -0.03290806 -0.03995629  0.03314841
+  -0.00682592  0.02157647 -0.01363678  0.02037162]
+ [ 0.00137597 -0.00810526 -0.00789835  0.01177366  0.01724485 -0.01280541
+  -0.00500012 -0.01060009  0.00439702  0.00109832]
+ [-0.00342885 -0.00521311 -0.00286281  0.00876727  0.02119179 -0.01804265
+  -0.00023278 -0.00662742  0.00159373 -0.00607913]
+ [ 0.00485893 -0.02764407 -0.01680007  0.01490704  0.03053757 -0.01474566
+   0.01523503 -0.01701152  0.00935261 -0.01919872]
+ [ 0.00441207  0.01062758  0.0009923  -0.00195185 -0.03391163  0.00700015
+  -0.01729492  0.02934397 -0.00055241  0.02234029]
+ [-0.00566492  0.08980699  0.07829844 -0.07391623 -0.10234859  0.07016262
+  -0.02732586  0.03972578 -0.04358882  0.0727197 ]
+ [ 0.00683987 -0.08720489 -0.06946952  0.07167129  0.09921473 -0.06916417
+   0.02526405 -0.04502392  0.04898303 -0.07693009]
+ [-0.00693347  0.06336573  0.04195095 -0.04914566 -0.09512565  0.05900386
+  -0.02007156  0.04930217 -0.02335414  0.06115904]
+ [ 0.01166318 -0.11320196 -0.09207953  0.09488892  0.14519761 -0.09512988
+   0.04337149 -0.06916272  0.05126077 -0.10900271]
+ [-0.00334481 -0.02625076 -0.01078303  0.01369854  0.03693113 -0.00433335
+   0.02339277 -0.02676726  0.00600292 -0.03320062]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}427}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{pinv}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0.05555556 0.05555556]
+ [0.05555556 0.05555556]
+ [0.05555556 0.05555556]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}428}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{matrix\PYZus{}rank}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}429}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1.00000000e+00 -1.51179305e-16  1.51179305e-16 -2.54749398e-16
+  -3.67149742e-16 -2.41936385e-16  9.42562944e-17  1.39507913e-16
+   8.03069462e-16 -3.72549003e-16]
+ [-1.66306144e-16  1.00000000e+00  0.00000000e+00  1.20192454e-16
+   3.38353684e-16 -1.69176842e-16  1.68413874e-16  0.00000000e+00
+  -3.38353684e-16  1.69176842e-16]
+ [-1.75291384e-16  6.47495485e-17  1.00000000e+00  0.00000000e+00
+   6.07414300e-17 -2.47063753e-16  1.74832740e-16 -1.05938576e-16
+  -2.75554816e-16  1.90307175e-16]
+ [-2.25648357e-16  6.35750063e-19 -1.22119330e-16  1.00000000e+00
+   1.65302783e-16  6.61211134e-16 -4.13256959e-16 -1.13645664e-16
+  -3.30605567e-16  8.81399607e-17]
+ [ 2.58240544e-16 -7.36487976e-17 -4.49948222e-17  3.70511467e-17
+   1.00000000e+00 -4.41720064e-16  3.43400315e-16  5.53698788e-17
+   1.28206534e-17  2.27997590e-17]
+ [ 7.80803993e-16  1.53659477e-16  4.73122306e-16 -4.43214687e-16
+  -5.64537221e-16  1.00000000e+00  7.49334047e-16  5.18769725e-16
+   1.84451458e-15 -6.91692967e-16]
+ [-8.11355199e-16 -1.72151492e-16 -5.15239633e-16  3.80086702e-16
+   6.39828447e-16  8.94566055e-16  1.00000000e+00 -5.57670689e-16
+  -1.89480169e-15  6.45795797e-16]
+ [ 7.69560588e-16 -3.91320300e-17  2.96554261e-16 -3.24251449e-16
+  -7.00625919e-16 -6.67474541e-16  3.62772124e-16  1.00000000e+00
+   1.25710010e-15 -5.38757188e-16]
+ [-1.16736920e-15 -1.40882275e-16 -5.86207236e-16  5.22779421e-16
+   9.82861430e-16  1.41241380e-15 -1.04943413e-15 -6.75938483e-16
+   1.00000000e+00  8.94571191e-16]
+ [-2.20983087e-16 -5.45240495e-17 -2.67028680e-17  2.38136089e-17
+   3.80385576e-16  8.66918350e-16 -6.40885375e-16 -3.07902990e-17
+  -1.60475165e-16  1.00000000e+00]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}430}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{b}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{b}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1.00000000e+00  0.00000000e+00  0.00000000e+00  3.66366106e-18
+   0.00000000e+00  6.70466726e-18  0.00000000e+00 -1.65242497e-16
+   0.00000000e+00  0.00000000e+00]
+ [ 0.00000000e+00  1.00000000e+00  3.94745964e-16  1.57898386e-16
+   2.36847579e-16 -7.29285844e-17 -2.38821308e-15  1.89478063e-15
+   7.89491929e-17  1.73688224e-15]
+ [ 0.00000000e+00  0.00000000e+00  1.00000000e+00  0.00000000e+00
+   1.84123245e-16 -2.08437413e-16 -1.64142578e-15  1.53617047e-15
+   0.00000000e+00  1.65428615e-15]
+ [ 0.00000000e+00  0.00000000e+00 -3.19627653e-16  1.00000000e+00
+  -3.13044782e-16  0.00000000e+00  2.03479108e-15 -1.45761477e-15
+   0.00000000e+00 -1.40870152e-15]
+ [ 0.00000000e+00  0.00000000e+00 -5.71651534e-16  8.70706297e-17
+   1.00000000e+00  1.70717665e-16  2.92314685e-15 -2.05901153e-15
+  -1.70717665e-16 -2.67095705e-15]
+ [ 0.00000000e+00  0.00000000e+00  2.41563534e-16 -9.58709703e-17
+   3.71885738e-16  1.00000000e+00 -1.98178199e-15  1.36247512e-15
+   0.00000000e+00  1.71857657e-15]
+ [ 0.00000000e+00  0.00000000e+00 -2.47573405e-16 -8.10718867e-18
+   1.64257275e-16  9.71597549e-17  1.00000000e+00 -6.10034686e-16
+  -7.03886176e-17 -5.90385535e-16]
+ [ 0.00000000e+00  0.00000000e+00  3.11940839e-16 -8.63365623e-17
+   1.03479903e-16  2.43514430e-17 -1.43783626e-15  1.00000000e+00
+   0.00000000e+00  1.20871187e-15]
+ [ 0.00000000e+00  0.00000000e+00 -1.73033736e-16  0.00000000e+00
+  -1.90251253e-16  1.15926916e-16  9.51316675e-16 -8.57263557e-16
+   1.00000000e+00 -8.50847356e-16]
+ [ 0.00000000e+00  0.00000000e+00  4.53134987e-16  0.00000000e+00
+   3.54861959e-17 -2.27206429e-16 -1.90253132e-15  1.50904187e-15
+   0.00000000e+00  1.00000000e+00]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}431}]:} \PY{n}{U}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{Vh} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{svd}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{U}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{Vh}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[-0.70710678 -0.70710678]
+ [-0.70710678  0.70710678]]
+[7.34846923e+00 9.12304898e-17]
+[[-5.77350269e-01 -5.77350269e-01 -5.77350269e-01]
+ [-8.16496581e-01  4.08248290e-01  4.08248290e-01]
+ [-9.55821271e-17 -7.07106781e-01  7.07106781e-01]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}432}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{cholesky}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}433}]:} \PY{n}{D}\PY{p}{,}\PY{n}{V} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{D}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{V}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 400.11992062 +0.j          100.05054323 +0.j
+ -104.17818868+58.15124219j -104.17818868-58.15124219j
+   -1.35394684+76.3712445j    -1.35394684-76.3712445j
+   19.75160406+43.02447888j   19.75160406-43.02447888j
+  -44.84386153 +0.j            7.2344606  +0.j        ]
+[[ 0.36182749+0.j          0.51576936+0.j         -0.07411024-0.25634452j
+  -0.07411024+0.25634452j  0.04802583-0.37692225j  0.04802583+0.37692225j
+  -0.21803315-0.10399653j -0.21803315+0.10399653j -0.19576122+0.j
+  -0.19313492+0.j        ]
+ [ 0.32919515+0.j          0.11993101+0.j          0.1687245 -0.01816349j
+   0.1687245 +0.01816349j -0.04673047+0.34756813j -0.04673047-0.34756813j
+   0.16164023-0.01969516j  0.16164023+0.01969516j  0.20672699+0.j
+   0.05839928+0.j        ]
+ [ 0.30371174+0.j         -0.37016234+0.j          0.0383531 -0.02103675j
+   0.0383531 +0.02103675j -0.11516202-0.25278559j -0.11516202+0.25278559j
+   0.06701643-0.0566897j   0.06701643+0.0566897j  -0.12918233+0.j
+   0.06722361+0.j        ]
+ [ 0.41172417+0.j         -0.15249348+0.j          0.51938962+0.j
+   0.51938962-0.j          0.229523  +0.18311654j  0.229523  -0.18311654j
+   0.12450877+0.0364015j   0.12450877-0.0364015j  -0.00686544+0.j
+   0.12749797+0.j        ]
+ [ 0.34391817+0.j          0.19248755+0.j         -0.18140585+0.17803055j
+  -0.18140585-0.17803055j -0.20321003-0.09595794j -0.20321003+0.09595794j
+  -0.3386738 -0.06371195j -0.3386738 +0.06371195j  0.37422208+0.j
+  -0.11109576+0.j        ]
+ [ 0.21811857+0.j          0.35915742+0.j          0.10914818+0.30428053j
+   0.10914818-0.30428053j  0.17716063-0.14008265j  0.17716063+0.14008265j
+  -0.20032947-0.02647375j -0.20032947+0.02647375j  0.24886886+0.j
+  -0.44473273+0.j        ]
+ [ 0.3088102 +0.j         -0.51025619+0.j         -0.14266924-0.34694747j
+  -0.14266924+0.34694747j  0.00174851+0.24852379j  0.00174851-0.24852379j
+   0.39438868+0.17935018j  0.39438868-0.17935018j -0.04012444+0.j
+   0.47170156+0.j        ]
+ [ 0.26879386+0.j         -0.05207267+0.j         -0.01089375+0.13003534j
+  -0.01089375-0.13003534j -0.50868178+0.j         -0.50868178-0.j
+  -0.42376683+0.24076524j -0.42376683-0.24076524j  0.38480138+0.j
+  -0.33848852+0.j        ]
+ [ 0.3640082 +0.j         -0.28317023+0.j         -0.3584501 +0.0463244j
+  -0.3584501 -0.0463244j   0.13008469+0.14836581j  0.13008469-0.14836581j
+   0.51069836+0.j          0.51069836-0.j         -0.55864659+0.j
+   0.61256689+0.j        ]
+ [ 0.18161097+0.j         -0.22365213+0.j         -0.34454042-0.22829767j
+  -0.34454042+0.22829767j  0.2925477 +0.1506861j   0.2925477 -0.1506861j
+   0.20896351+0.03567583j  0.20896351-0.03567583j -0.488324  +0.j
+   0.12676425+0.j        ]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}434}]:} \PY{n}{Q}\PY{p}{,}\PY{n}{R} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{qr}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{Q}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{R}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[-0.70710678 -0.70710678]
+ [-0.70710678  0.70710678]]
+[[-4.24264069e+00 -4.24264069e+00 -4.24264069e+00]
+ [ 0.00000000e+00 -1.08176281e-16 -1.08176281e-16]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}435}]:} \PY{n}{LU}\PY{p}{,}\PY{n}{P}\PY{o}{=}\PY{n}{scipy}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{lu\PYZus{}factor}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{LU}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{P}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 9.40000000e+01  8.10000000e+01  8.10000000e+01  5.40000000e+01
+   5.90000000e+01  0.00000000e+00  0.00000000e+00  0.00000000e+00
+   0.00000000e+00  5.40000000e+01]
+ [ 0.00000000e+00  8.40000000e+01  6.90000000e+01  0.00000000e+00
+   9.70000000e+01  8.10000000e+01  0.00000000e+00  6.90000000e+01
+   8.10000000e+01  9.40000000e+01]
+ [ 0.00000000e+00  0.00000000e+00  8.70000000e+01  5.40000000e+01
+   7.80000000e+01  8.30000000e+01  5.40000000e+01  0.00000000e+00
+   0.00000000e+00  6.20000000e+01]
+ [ 6.91489362e-01  5.93971631e-02 -6.90908535e-01  8.59686354e+01
+   7.73314686e+01  1.33534238e+02  3.73090609e+01 -4.09840426e+00
+   6.11888298e+01 -8.74296894e-02]
+ [ 0.00000000e+00  6.42857143e-01 -3.85878489e-02  8.96649615e-01
+  -1.28686522e+02 -1.68602060e+02 -3.13694113e+01  2.31768974e+00
+  -1.06936369e+02 -5.79577310e+01]
+ [ 6.80851064e-01  2.95845998e-01 -2.47842644e-01 -2.71988203e-01
+   2.21486296e-01  1.23270197e+02  3.04790219e+01  5.79585720e+01
+   1.06364054e+02 -3.63961740e+01]
+ [ 6.27659574e-01  6.14235056e-02  9.10500297e-02  3.39538731e-01
+   5.93293879e-01  8.12508382e-01  7.32622461e+01  8.68644841e+00
+  -4.87282739e+01  1.86753209e+01]
+ [ 0.00000000e+00  0.00000000e+00  9.42528736e-01  5.36282193e-01
+   8.93556908e-01  3.87876534e-01 -7.46584808e-01  7.91313139e+01
+   4.81033420e+01  2.14585690e+01]
+ [ 6.59574468e-01  4.11600811e-01 -9.40528596e-01  1.76477419e-01
+  -3.25393829e-01 -2.73412721e-01  5.77791142e-01 -2.03400644e-01
+  -1.19142458e+01  3.07846916e+01]
+ [ 6.59574468e-01 -6.36018237e-01  9.70801453e-01 -4.54122595e-01
+  -4.90916439e-01 -4.15247586e-01 -5.21739536e-01  9.06860881e-01
+  -1.61889940e-01 -3.73590788e+01]]
+[4 3 2 4 9 9 8 8 9 9]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}436}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{fft}\PY{o}{.}\PY{n}{fft}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[9.+0.j 0.+0.j 0.+0.j]
+ [9.+0.j 0.+0.j 0.+0.j]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}437}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{fft}\PY{o}{.}\PY{n}{ifft}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[3.+0.j 0.+0.j 0.+0.j]
+ [3.+0.j 0.+0.j 0.+0.j]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}438}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[3. 3. 3.]
+ [3. 3. 3.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}439}]:} \PY{n}{I} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{b}\PY{o}{=}\PY{n}{a}\PY{p}{[}\PY{n}{I}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{I}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0 1]
+[[3. 3. 3.]
+ [3. 3. 3.]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}440}]:} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{lstsq}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/aidancurtis/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:1: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  """Entry point for launching an IPython kernel.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}440}]:} (array([[0.71000838, 1.04011371],
+                  [0.63549003, 0.11166535]]),
+           array([7023.10991755, 1782.15830892]),
+           2,
+           array([138.40212898,  61.5130124 ]))
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}441}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{scipy}\PY{o}{.}\PY{n}{signal}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{n}{q}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        AttributeError                            Traceback (most recent call last)
+
+        <ipython-input-441-c85b24e98750> in <module>()
+    ----> 1 print(scipy.signal.resample(x, len(x)/q))
+    
+
+        AttributeError: module 'scipy' has no attribute 'signal'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}442}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{unique}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[3.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}443}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[3. 3. 3.]
+ [3. 3. 3.]]
+
+    \end{Verbatim}
+
+    \section{Task 3}\label{task-3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}445}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_77_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Task 4}\label{task-4}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}456}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{x} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Task 5}\label{task-5}
+
+    I am using a github account w/ github educate. My account username is
+\texttt{southpawac}
+
+    \section{Task 6}\label{task-6}
+
+    \texttt{https://github.com/southpawac/Comp576Homework0}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
